@@ -414,12 +414,12 @@ func (m *Model) RemoveIndex(index int) (fmt.Stringer, error) {
 
 	// check if cursor position is still valid and change if not
 	oldCursor := m.cursorIndex
-	newCursor, err := m.ValidIndex(oldCursor)
+	newCursor, _ := m.ValidIndex(oldCursor)
 	newOffset, _ := m.validOffset(newCursor)
 	m.cursorIndex = newCursor
 	m.lineOffset = newOffset
 
-	return itemValue, err
+	return itemValue, nil
 }
 
 // Sort sorts the list items according to the set less-function or, if not set, after String comparison.

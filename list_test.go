@@ -2,9 +2,10 @@ package bubblelister
 
 import (
 	"fmt"
-	tea "github.com/charmbracelet/bubbletea"
 	"strings"
 	"testing"
+
+	tea "github.com/charmbracelet/bubbletea"
 )
 
 // TestLines test if the models Lines methode returns the write amount of lines
@@ -330,6 +331,28 @@ func TestRemoveIndex(t *testing.T) {
 	testStr := "test"
 	m.AddItems(MakeStringerList(testStr)...)
 	item, err = m.RemoveIndex(0)
+	if err != nil {
+		t.Error("should be no error, but: ", err)
+	}
+	if item.String() != testStr && err != nil && m.Len() != 0 {
+		t.Error("RemoveIndex should return no error and the corresponding string value when the index is valid")
+	}
+}
+
+func TestRemoveLastIndex(t *testing.T) {
+	m := NewModel()
+	item, err := m.RemoveIndex(0)
+	if item != nil && err != nil {
+		t.Error("RemoveIndex should return a error and a nil value when the index is not valid")
+	}
+	testStr := "test"
+	m.AddItems(MakeStringerList(testStr, testStr, testStr)...)
+	m.Bottom()
+	idx, _ := m.GetCursorIndex()
+	item, err = m.RemoveIndex(idx)
+	if err != nil {
+		t.Error("should be no error, but:", err)
+	}
 	if item.String() != testStr && err != nil && m.Len() != 0 {
 		t.Error("RemoveIndex should return no error and the corresponding string value when the index is valid")
 	}
