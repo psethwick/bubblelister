@@ -2,8 +2,9 @@ package bubblelister
 
 import (
 	"fmt"
-	"github.com/muesli/reflow/ansi"
 	"strings"
+
+	"github.com/muesli/reflow/ansi"
 )
 
 // Prefixer is used to prefix all visible Lines.
@@ -116,11 +117,12 @@ func (d *DefaultPrefixer) Prefix(lineIndex, allLines int) string {
 		lineNum int
 	)
 
+	number := ""
 	if d.Number {
 		lineNum = lineNumber(d.NumberRelative, d.cursorIndex, d.currentIndex)
+		number = fmt.Sprintf("%d", lineNum)
 	}
 
-	number := fmt.Sprintf("%d", lineNum)
 	// since digits are only single bytes, len is sufficient:
 	padTo := d.numWidth - len(number)
 	if padTo < 0 {
