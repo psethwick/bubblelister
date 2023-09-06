@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/muesli/reflow/ansi"
 	list "github.com/treilik/bubblelister"
-	"strings"
 )
 
 // SelectPrefixer is the default struct used for Prefixing a line
@@ -130,10 +131,11 @@ func (s *SelectPrefixer) Prefix(lineIndex, allLines int) string {
 	firstPad := strings.Repeat(" ", s.numWidth)
 	var wrapPad string
 	var lineNum int
+	number := ""
 	if s.Number {
 		lineNum = lineNumber(s.NumberRelative, s.cursorIndex, s.currentIndex)
+		number = fmt.Sprintf("%d", lineNum)
 	}
-	number := fmt.Sprintf("%d", lineNum)
 	// since digits are only single bytes, len is sufficient:
 	padTo := s.numWidth - len(number)
 	if padTo < 0 {
