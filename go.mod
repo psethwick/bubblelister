@@ -1,4 +1,4 @@
-module github.com/treilik/bubblelister
+module github.com/psethwick/bubblelister
 
 go 1.17
 
@@ -9,6 +9,8 @@ require (
 	github.com/muesli/termenv v0.9.0
 	github.com/treilik/reflow v0.1.1-0.20211027174018-7170e740e1ac // TODO change back to muesli after pr is merged
 )
+
+require github.com/treilik/bubblelister v0.2.0
 
 require (
 	github.com/atotto/clipboard v0.1.2 // indirect
